@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Task manager</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<h1>Tasks</h1>
+	<table class="table table-striped">
+		<tr>
+			<th>Task</th>
+			<th>Date</th>
+			<th>Description</th>
+			<th>State</th>
+			<th>Person</th>
+			<th></th>
+			<th></th>
+		</tr>
+		<tr th:each="task : ${tasks}">
+			<td th:text="${task.name}"></td>
+			<td th:text="${task.date}"></td>
+			<td th:text="${task.desc}"></td>
+			<td th:text="${task.state}"></td>
+			<td th:text="${task.person}"></td>
+		</tr>
+	</table>
+	<a class="btn btn-success" href="/add">Add Book</a>
+	</div>
+</body>
+</html>
