@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>Task manager</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+</head>
+<body>
+<div class="container">
+	<h1>Add student</h1>
+		<form th:object="${task}" th:action="@{save}" action="#" method="post">
+			<label for="name">Task</label>
+			<input type="text" id="name" th:field="*{name}" />
+			<label for="date">Deadline</label>
+			<input type="text" id="date" th:field="*{date}" />
+			<label for="desc">Description</label>
+			<input type="text" id="desc" th:field="*{desc}" />
+			<label for="state">State</label>
+			<input type="text" id="state" th:field="*{state}" />
+			<label for="deplist">Person</label>
+			<select id="personlist" th:field="*{person}" class="form-control">
+			<option th:each="person: ${persons}"
+				th:value="${person.personid}"
+				th:text="${person.name}"></option>
+			</select>
+			<input type="submit" value="Save"></input>
+		</form>
+</div>
+</body>
+</html>

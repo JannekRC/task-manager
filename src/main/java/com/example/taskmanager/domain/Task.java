@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Task {
@@ -16,11 +18,14 @@ public class Task {
 	private LocalDate date;
 	private String desc;
 	private String state;
-	private String person;
+	
+	@ManyToOne
+    @JoinColumn(name = "personid")
+    private Person person;
 	
 	public Task() {};
 	
-	public Task(String name, LocalDate date, String desc, String state, String person) {
+	public Task(String name, LocalDate date, String desc, String state, Person person) {
 		super();
 		this.name = name;
 		this.date = date;
@@ -61,10 +66,11 @@ public class Task {
 		this.state = state;
 	}
 
-	public String getPerson() {
+	public Person getPerson() {
 		return person;
 	}
-	public void setPerson(String person) {
+
+	public void setPerson(Person person) {
 		this.person = person;
 	}
 }

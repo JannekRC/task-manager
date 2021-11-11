@@ -23,10 +23,11 @@
 			<td th:text="${task.date}"></td>
 			<td th:text="${task.desc}"></td>
 			<td th:text="${task.state}"></td>
-			<td th:text="${task.person}"></td>
+			<td th:text="${task.person.name}"></td>
+			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${task.id})}">Delete</a></td>
 		</tr>
 	</table>
-	<a class="btn btn-success" href="/add">Add Book</a>
+	<a class="btn btn-success" href="/add">Add Task</a> 
 	</div>
 </body>
 </html>
