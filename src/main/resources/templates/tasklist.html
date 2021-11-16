@@ -14,16 +14,17 @@
 			<th>Date</th>
 			<th>Description</th>
 			<th>State</th>
-			<th>Person</th>
+			<th>Person <div><a href="/addper">Add New Person</a></div></th>
 			<th></th>
 			<th></th>
 		</tr>
 		<tr th:each="task : ${tasks}">
-			<td th:text="${task.name}"></td>
-			<td th:text="${task.date}"></td>
-			<td th:text="${task.desc}"></td>
-			<td th:text="${task.state}"></td>
-			<td th:text="${task.person.name}"></td>
+			<td th:text="${task.name}"></td> 
+			<td th:text="${task.date}" th:align= "center"></td>
+			<td th:text="${task.desc}" th:align= "center"></td>
+			<td th:text="${task.state.desc}" th:align= "center"></td>
+			<td th:text="${task.person.name}" th:align= "center"></td>
+			<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${task.id})}">Edit</a></td>
 			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${task.id})}">Delete</a></td>
 		</tr>
 	</table>

@@ -7,9 +7,14 @@
 </head>
 <body>
 <div class="container">
-	<h1>Add task</h1>
-		<form th:object="${task}" th:action="@{save}" action="#" method="post">
+	<h1>Edit task</h1>
+		<form th:object="${task}" th:action="@{../save}" action="#" method="post">
 			<label for="name">Task</label>
+			
+			<label for="id"></label>
+			<input type="hidden" id="id" th:field="*{id}" readonly="readonly" />
+			<div style="clear: both; display: block; height: 10px;"></div>
+
 			<input type="text" id="name" th:field="*{name}" />
 			<label for="desc">Description</label>
 			<input type="text" id="desc" th:field="*{desc}" />
