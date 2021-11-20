@@ -7,5 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface TaskRepository extends CrudRepository<Task, Long> {
 
 	List<Task> findById(long taskId);
+	
+	List<Task> findByPerson(Person person);
 
 }

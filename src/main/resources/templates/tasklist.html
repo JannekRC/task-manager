@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 	<title>Task manager</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
@@ -8,13 +8,14 @@
 <body>
 <div class="container">
 	<h1>Tasks</h1>
+	<h3 th:inline="text">Logged in as [[${#httpServletRequest.remoteUser}]]</h3>
 	<table class="table table-striped">
 		<tr>
 			<th>Task</th>
 			<th>Date</th>
 			<th>Description</th>
 			<th>State</th>
-			<th>Person <div><a href="/addper">Add New Person</a></div></th>
+			<th><a href="/addper">Add New Person</a> <div>Person</div></th>
 			<th></th>
 			<th></th>
 		</tr>
@@ -25,10 +26,16 @@
 			<td th:text="${task.state.desc}" th:align= "center"></td>
 			<td th:text="${task.person.name}" th:align= "center"></td>
 			<td><a class="btn btn-success" th:href="@{/edit/{id}(id=${task.id})}">Edit</a></td>
-			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${task.id})}">Delete</a></td>
+			<td sec:authorize="hasAuthority('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${task.id})}">Delete</a></td>
 		</tr>
 	</table>
 	<a class="btn btn-success" href="/add">Add Task</a> 
+	
+	<div style="clear: both; display: block; height: 10px;"></div>
+	
+	<form th:action="@{/logout}" method="post">
+<input type="submit" value="Sign Out"/>
+</form>
 	</div>
 </body>
 </html>

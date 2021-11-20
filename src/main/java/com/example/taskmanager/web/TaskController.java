@@ -1,5 +1,6 @@
 package com.example.taskmanager.web;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,12 +10,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.taskmanager.domain.Person;
 import com.example.taskmanager.domain.PersonRepository;
 import com.example.taskmanager.domain.StateRepository;
 import com.example.taskmanager.domain.Task;
 import com.example.taskmanager.domain.TaskRepository;
+import com.example.taskmanager.domain.UserRepository;
 
 @Controller
 public class TaskController {
@@ -24,7 +28,10 @@ public class TaskController {
 	private PersonRepository prepository;
 	@Autowired
 	private StateRepository srepository;
+	@Autowired
+	private UserRepository urepository;
 
+	//Basic task manager features
 	@RequestMapping(value = { "/tasklist" })
 	public String taskList(Model model) {
 		model.addAttribute("tasks", repository.findAll());
@@ -71,5 +78,24 @@ public class TaskController {
 	public String save(Person person){
 		prepository.save(person);
 		return "redirect:tasklist";
+	}
+	
+	// RESTful service to get all tasks
+	@GetMapping("/tasks")
+    public @ResponseBody List<Task> taskListRest() {	
+        return (List<Task>) repository.findAll();
+    }
+	
+	// RESTful service to get persons by name
+		@GetMapping("/person/{name}")
+		public @ResponseBody List<Person> findPersonRest(@PathVariable("name") String name) {	
+	    	return prepository.findByName(name);
+	}
+	
+	//Spring security
+	@RequestMapping(value = { "/", "/login" })
+	public String login(Model model) {
+		model.addAttribute("users", urepository.findAll());
+		return "login";
 	}
 }
