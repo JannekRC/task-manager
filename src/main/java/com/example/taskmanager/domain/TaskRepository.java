@@ -8,6 +8,8 @@ public interface TaskRepository extends CrudRepository<Task, Long> {
 
 	List<Task> findById(long taskId);
 	
-	List<Task> findByPerson(Person person);
+	List<Task> findByPerson(String name);
+	
+	List<Task> findByName(String name);
 
 }

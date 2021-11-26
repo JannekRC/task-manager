@@ -29,12 +29,11 @@
 				th:value="${person.personid}"
 				th:text="${person.name}"></option>
 			</select>
-			<a href="/addper">Add New Person</a>
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
 			<label for="date">Deadline</label>
-			<input type="text" id="date" th:field="*{date}" />
+			<input type="date" id="date" th:field="*{date}" />
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
 			

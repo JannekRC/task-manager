@@ -10,11 +10,12 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.taskmanager.domain.Person;
 import com.example.taskmanager.domain.PersonRepository;
+import com.example.taskmanager.domain.State;
 import com.example.taskmanager.domain.StateRepository;
 import com.example.taskmanager.domain.Task;
 import com.example.taskmanager.domain.TaskRepository;
@@ -56,15 +57,23 @@ public class TaskController {
 	}
 	
 	@PostMapping("/save")
-	public String save(Task task){
+	public String save(
+		@RequestParam(value = "name", required = false) String name,
+		@RequestParam(value = "date", required = false) String date,
+		@RequestParam(value = "desc", required = false) String desc,
+		@RequestParam(value = "state", required = false) State state,
+		@RequestParam(value = "person", required = false) Person person
+		){
+		Task task = new Task(name, date, desc, state, person);
 		repository.save(task);
 		return "redirect:tasklist";
 	}
 	
+	
 	@GetMapping("/delete/{id}")
 	public String deleteTask(@PathVariable("id") Long taskId, Model model) {
-	repository.deleteById(taskId);
-	return "redirect:../tasklist";
+		repository.deleteById(taskId);
+		return "redirect:../tasklist";
 	}
 	
 	//Adding and saving new person to drop down list

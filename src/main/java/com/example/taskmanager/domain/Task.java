@@ -1,6 +1,9 @@
 package com.example.taskmanager.domain;
 
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -14,7 +17,7 @@ public class Task {
     @GeneratedValue(strategy=GenerationType.AUTO)
 	private Long id;
 	private String name;
-	private String date;
+	private LocalDate date;
 	private String desc;
 	
 	@ManyToOne
@@ -30,11 +33,21 @@ public class Task {
 	public Task(String name, String date, String desc, State state, Person person) {
 		super();
 		this.name = name;
+		this.date = LocalDate.parse(date, DateTimeFormatter.ISO_LOCAL_DATE);
+		this.desc = desc;
+		this.state = state;
+		this.person = person;
+	}
+	
+	public Task(String name, LocalDate date, String desc, State state, Person person) {
+		super();
+		this.name = name;
 		this.date = date;
 		this.desc = desc;
 		this.state = state;
 		this.person = person;
 	}
+	
 	public Long getId() {
 		return id;
 	}
@@ -47,10 +60,10 @@ public class Task {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
-	public void setDate(String date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 	public String getDesc() {

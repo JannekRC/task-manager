@@ -1,5 +1,6 @@
 package com.example.taskmanager;
 
+
 import java.time.LocalDate;
 
 import org.springframework.boot.CommandLineRunner;
@@ -38,9 +39,9 @@ public class TaskmanagerApplication {
 			srepository.save(new State("Done"));
 			
 			// Create demo tasks
-			Task t1 = new Task("Have fun", LocalDate.now().toString(), "Get some balloons or something", srepository.findByDesc("To do").get(0), prepository.findByName("Harry").get(0));
-			Task t2 = new Task("Laugh", LocalDate.now().toString(), "Inhale etc.", srepository.findByDesc("In progress").get(0), prepository.findByName("Kaley").get(0));
-			Task t3 = new Task("Wash hair", LocalDate.now().toString(), "With shampoo!", srepository.findByDesc("Done").get(0), prepository.findByName("Gwen").get(0));
+			Task t1 = new Task("Have fun", "1996-12-04", "Get some balloons or something", srepository.findByDesc("To do").get(0), prepository.findByName("Harry").get(0));
+			Task t2 = new Task("Laugh", "1996-12-04", "Inhale etc.", srepository.findByDesc("In progress").get(0), prepository.findByName("Kaley").get(0));
+			Task t3 = new Task("Wash hair", "1996-12-04", "With shampoo!", srepository.findByDesc("Done").get(0), prepository.findByName("Gwen").get(0));
 			
 			repository.save(t1);
 			repository.save(t2);
