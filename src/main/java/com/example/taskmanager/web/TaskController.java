@@ -10,12 +10,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.taskmanager.domain.Person;
 import com.example.taskmanager.domain.PersonRepository;
-import com.example.taskmanager.domain.State;
 import com.example.taskmanager.domain.StateRepository;
 import com.example.taskmanager.domain.Task;
 import com.example.taskmanager.domain.TaskRepository;
@@ -56,6 +54,8 @@ public class TaskController {
 		return "edittask";
 	}
 	
+	// Busted attempt at making LocalDate work
+	/*
 	@PostMapping("/save")
 	public String save(
 		@RequestParam(value = "name", required = false) String name,
@@ -65,6 +65,13 @@ public class TaskController {
 		@RequestParam(value = "person", required = false) Person person
 		){
 		Task task = new Task(name, date, desc, state, person);
+		repository.save(task);
+		return "redirect:tasklist";
+	}
+	*/
+	
+	@PostMapping("/save")
+	public String save(Task task){
 		repository.save(task);
 		return "redirect:tasklist";
 	}
